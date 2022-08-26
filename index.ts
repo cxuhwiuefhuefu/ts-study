@@ -2,7 +2,7 @@
  * @Author: Sunny
  * @Date: 2022-08-18 12:33:27
  * @LastEditors: Suuny
- * @LastEditTime: 2022-08-24 16:03:51
+ * @LastEditTime: 2022-08-26 16:30:06
  * @Description: 
  * @FilePath: /ts-study/index.ts
  */
@@ -870,5 +870,194 @@
 
  
 //  第二十四章节  Rollup 构建 TS 项目
+
+
+//  第二十五章节  webpack 构建 TS 项目
+
+
+
+
+//  第二十六章节  TS 发布订阅模式
+// interface Events {
+//     on: (name: string, fn: Function) => void,
+//     emit: (name: string, ...args: Array<any>) => void,
+//     off: () => void,
+//     once: () => void
+// }
+// interface List {
+//     [key: string]:Array<Function>
+// }
+// class Dispatch implements Events {
+//     list: List
+//     constructor () {
+//         this.list = {}
+//     }
+//     on(name: string, fn: Function) {
+//         const callback = this.list[name] || [];
+//         callback.push(fn);
+//         this.list[name] = callback;
+//         console.log(this.list)
+//     }
+//     emit(name:string, ...args: Array<any>) {
+//         let eventName = this.list[name];
+//         if(eventName) {
+//             eventName.forEach(fn => {
+//                 fn.apply(this, args)
+//             })
+//         }else {
+//              console.log(`名称错误${name}`)
+//         }
+//     }
+//     off() {
+
+//     }
+//     once() {
+
+//     }
+// }
+// console.log(new Dispatch())
+
+// const o = new Dispatch();
+// o.on('post', () => {
+//     console.log(1);
+// })
+
+
+// const fn = (...args: Array<any>, )
+
+// // o.on('post1', )
+// // ?????
+
+
+
+
+
+// TS 第二十七 TS 进阶 proxy Reflect 
+
+// type Person = {
+//     name: string,
+//     age: number,
+//     text: string
+// }
+
+// const proxy = (object: any, key: any) => {
+//     return new Proxy(object, {
+//         get (target, prop, receiver) {
+//             console.log("=====>get", prop)
+//             return Reflect.get(target, prop, receiver)    
+//         },
+//         set (target, prop, value, receiver ) {
+//             console.log("=====>set", prop)
+//             return Reflect.set(target, prop, value, receiver)   
+//         }
+//     })
+// }
+// const logAccess = <T>(object: T, key: keyof T):T => {
+//     return proxy(object, key);
+// }
+
+// let man: Person = logAccess({
+//     name: 'hh',
+//     age: 32,
+//     text: 'dwd'
+// }, 'name')
+
+// let man2: Person = logAccess({
+//     name: 'hh',
+//     age: 32,
+//     text: 'dwd',
+//     id: 23
+// }, 'id')
+
+// man.age = 23;
+// console.log(man);
+
+
+
+
+
+// 第二十八章节 TS进阶用法 Partial & Pick
+
+// type Person = {
+//     name: string,
+//     age: number,
+//     text: string
+// }
+// type key = 'name' | 'age' | 'text';
+
+// type Par<T> = {
+//     [P in keyof T]?: T[P]; 
+// }
+
+// type p = Partial<Person>
+
+
+
+// type Person = {
+//     name: string,
+//     age: number,
+//     text: string
+// }
+// type key = 'name' | 'age' | 'text';
+
+// type Par<T, K extends keyof T> = {
+//     [P in K]?: T[P]; 
+// }
+
+// type p = Pick<Person, 'name'>
+
+
+
+
+
+//  第二十九章 TS 进阶用法 Record & Readonly
+// type key = 'name' | 'age' | 'text';
+// type R<T> = {
+//     readonly [P in keyof T]: T[P]
+// }
+
+// type Person = {
+//     name: string,
+//     age: number,
+//     text: string
+// }
+// type man = R<Person>
+ 
+
+
+// type Rec<K extends keyof any, T> = {
+//     [P in K]: T
+// }
+// type key = string | number | symbol
+
+// type Person = {
+//     name: string,
+//     age: number,
+//     text: string
+// }
+
+// type K = 'A' | 'B' | 'C';
+// type B = Rec<K, Person>
+ 
+// let obj: B = {
+//     'A': {name: '哈哈哈', age: 34, text: 'ffr'},
+//     'B': {name: '哈哈哈', age: 34, text: 'ffr'},
+//     'C': {name: '哈哈哈', age: 34, text: 'ffr'}
+// }
+// console.log(obj);
+
+
+
+
+// 第三十章节 TS 进阶用法 inter
+// 定义一个类型 如果是数组类型就返回数组元素的类型 否则就传入什么类型 就返回什么类型
+
+type TYPE<T> = T extends Array<any> ? T[number] : T
+
+
+
+
+
+
 
 
